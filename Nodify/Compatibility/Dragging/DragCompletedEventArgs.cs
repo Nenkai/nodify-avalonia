@@ -44,12 +44,13 @@ public class DragCompletedEventArgs : RoutedEventArgs
     }
 
     /// <summary>
-    /// Read-only access to boolean states whether the drag operation was canceled or not.
+    /// Whether the drag operation was, or is canceled.
     /// </summary>
     /// <value></value>
     public bool Canceled
     {
         get { return _wasCanceled; }
+        set {  _wasCanceled = value; }
     }
         
     private double _horizontalChange;
