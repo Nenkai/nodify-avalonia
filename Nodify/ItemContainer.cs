@@ -169,7 +169,7 @@ namespace Nodify
         /// <summary>
         /// Occurs when this <see cref="ItemContainer"/> is the instigator of a drag operation.
         /// </summary>
-        public event EventHandler<DragEventArgs> DragStarted
+        public event EventHandler<DragStartedEventArgs> DragStarted
         {
             add => AddHandler(DragStartedEvent, value);
             remove => RemoveHandler(DragStartedEvent, value);
@@ -178,7 +178,7 @@ namespace Nodify
         /// <summary>
         /// Occurs when this <see cref="ItemContainer"/> is being dragged.
         /// </summary>
-        public event EventHandler<DragEventArgs> DragDelta
+        public event EventHandler<DragDeltaEventArgs> DragDelta
         {
             add => AddHandler(DragDeltaEvent, value);
             remove => RemoveHandler(DragDeltaEvent, value);
@@ -187,7 +187,7 @@ namespace Nodify
         /// <summary>
         /// Occurs when this <see cref="ItemContainer"/> completed the drag operation.
         /// </summary>
-        public event EventHandler<DragEventArgs> DragCompleted
+        public event EventHandler<DragCompletedEventArgs> DragCompleted
         {
             add => AddHandler(DragCompletedEvent, value);
             remove => RemoveHandler(DragCompletedEvent, value);
