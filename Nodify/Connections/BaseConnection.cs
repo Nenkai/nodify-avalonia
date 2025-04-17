@@ -511,7 +511,10 @@ namespace Nodify
 
                     if (DirectionalArrowsCount > 0)
                     {
-                        DrawDirectionalArrowsGeometry(context, Source + sourceOffset, Target + targetOffset);
+                        if (Direction == ConnectionDirection.Backward)
+                            DrawDirectionalArrowsGeometry(context, Target + targetOffset, Source + sourceOffset);
+                        else
+                            DrawDirectionalArrowsGeometry(context, Source + sourceOffset, Target + targetOffset);
                     }
                 }
             }
@@ -758,7 +761,7 @@ namespace Nodify
         {
             StopAnimation();
             animationTokenSource = new();
-            this.StartLoopingAnimation(DirectionalArrowsOffsetProperty, DirectionalArrowsOffset + 1d, duration, animationTokenSource.Token);
+            this.StartLoopingAnimation(DirectionalArrowsOffsetProperty, DirectionalArrowsOffset + 1d, duration, animationTokenSource.Token, reverse: Direction == ConnectionDirection.Backward);
         }
 
         /// <summary>Stops the animation started by <see cref="StartAnimation(double)"/></summary>

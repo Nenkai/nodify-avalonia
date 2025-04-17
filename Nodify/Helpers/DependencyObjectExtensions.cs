@@ -124,18 +124,18 @@ namespace Nodify
                 completedEvent?.Invoke(animatableElement, EventArgs.Empty);
         }
 
-        public static void StartLoopingAnimation<T>(this UIElement animatableElement, StyledProperty<T> dependencyProperty, T toValue, double durationInSeconds, CancellationToken token)
+        public static void StartLoopingAnimation<T>(this UIElement animatableElement, StyledProperty<T> dependencyProperty, T toValue, double durationInSeconds, CancellationToken token, bool reverse = false)
         {
             var fromValue = (T)animatableElement.GetValue(dependencyProperty);
 
             var keyframe1 = new KeyFrame()
             {
-                Setters = { new Setter(dependencyProperty, fromValue), }, KeyTime = TimeSpan.FromSeconds(0)
+                Setters = { new Setter(dependencyProperty, !reverse ? fromValue : toValue), }, KeyTime = TimeSpan.FromSeconds(0)
             };
 
             var keyframe2 = new KeyFrame()
             {
-                Setters = { new Setter(dependencyProperty, toValue), }, KeyTime = TimeSpan.FromSeconds(durationInSeconds)
+                Setters = { new Setter(dependencyProperty, !reverse ? toValue : fromValue), }, KeyTime = TimeSpan.FromSeconds(durationInSeconds)
             };
 
             var animation = new Avalonia.Animation.Animation()
