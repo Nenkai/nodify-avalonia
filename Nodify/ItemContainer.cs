@@ -325,7 +325,7 @@ namespace Nodify
         /// <returns>True if <paramref name="position"/> is selectable.</returns>
         protected virtual bool IsSelectableLocation(Point position)
         {
-            Size size = DesiredSizeForSelection ?? Bounds.Size;// RenderSize;
+            Size size = DesiredSizeForSelection is not null ? new Size(Bounds.Size.Width, DesiredSizeForSelection.Value.Height) : Bounds.Size;// RenderSize;
             return position.X >= 0 && position.Y >= 0 && position.X <= size.Width && position.Y <= size.Height;
         }
 
@@ -337,7 +337,8 @@ namespace Nodify
         /// <returns>True if <paramref name="area"/> contains or intersects this <see cref="ItemContainer"/>.</returns>
         public virtual bool IsSelectableInArea(Rect area, bool isContained)
         {
-            var bounds = new Rect(Location, DesiredSizeForSelection ?? Bounds.Size /* RenderSize */);
+            var size = DesiredSizeForSelection is not null ? new Size(Bounds.Size.Width, DesiredSizeForSelection.Value.Height) : Bounds.Size;
+            var bounds = new Rect(Location, size /* RenderSize */);
             return isContained ? area.Contains(bounds) : area.Intersects(bounds);
         }
 
