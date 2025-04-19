@@ -224,6 +224,8 @@ namespace Nodify
             if (Container != null && Editor != null && gestures.Drag.Matches(e.Source, e))
             {
                 // Switch the default movement mode if necessary
+                Container.IsSelected = true;
+
                 var prevMovementMode = MovementMode;
                 if (e.KeyModifiers == EditorGestures.Mappings.GroupingNode.SwitchMovementMode)
                 {
