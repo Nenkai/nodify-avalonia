@@ -80,7 +80,7 @@ namespace Nodify
             editor.TranslateTransform.X = -translate.X * editor.ViewportZoom;
             editor.TranslateTransform.Y = -translate.Y * editor.ViewportZoom;
 
-            var renderScale = (editor.GetVisualRoot()?.RenderScaling ?? 1);
+            double renderScale = TopLevel.GetTopLevel(editor)?.RenderScaling ?? 1;
             editor.DpiScaledTranslateTransform.X = editor.TranslateTransform.X * renderScale;
             editor.DpiScaledTranslateTransform.Y = editor.TranslateTransform.Y * renderScale;
 
@@ -947,7 +947,7 @@ namespace Nodify
         /// </summary>
         public NodifyEditor()
         {
-            AddHandler(Gestures.PointerTouchPadGestureMagnifyEvent, OnPointerTouchPadGestureMagnify);
+            AddHandler(InputElement.PointerTouchPadGestureMagnifyEvent, OnPointerTouchPadGestureMagnify);
             AddHandler(Connector.DisconnectEvent, new ConnectorEventHandler(OnConnectorDisconnected));
             AddHandler(Connector.PendingConnectionStartedEvent, new PendingConnectionEventHandler(OnConnectionStarted));
             AddHandler(Connector.PendingConnectionCompletedEvent, new PendingConnectionEventHandler(OnConnectionCompleted));
@@ -1465,7 +1465,7 @@ namespace Nodify
             BeginUpdateSelectedItems();
             for (var i = 0; i < items.Count; i++)
             {
-                var container = (ItemContainer)ItemContainerGenerator.ContainerFromIndex(i);
+                var container = (ItemContainer)ContainerFromIndex(i);
                 if (container.IsPreviewingSelection == true && container.IsSelectable)
                 {
                     Selection.Select(i);
@@ -1485,7 +1485,7 @@ namespace Nodify
             ItemCollection items = Items;
             for (var i = 0; i < items.Count; i++)
             {
-                var container = (ItemContainer)ItemContainerGenerator.ContainerFromIndex(i);
+                var container = (ItemContainer)ContainerFromIndex(i);
                 container.IsPreviewingSelection = null;
             }
         }
@@ -1503,7 +1503,7 @@ namespace Nodify
             BeginUpdateSelectedItems();
             for (var i = 0; i < items.Count; i++)
             {
-                var container = (ItemContainer)ItemContainerGenerator.ContainerFromIndex(i);
+                var container = (ItemContainer)ContainerFromIndex(i);
 
                 if (container.IsSelectableInArea(area, fit))
                 {
@@ -1541,7 +1541,7 @@ namespace Nodify
             BeginUpdateSelectedItems();
             for (var i = 0; i < items.Count; i++)
             {
-                var container = (ItemContainer)ItemContainerGenerator.ContainerFromIndex(i);
+                var container = (ItemContainer)ContainerFromIndex(i);
                 if (container.IsSelectableInArea(area, fit))
                 {
                     Selection.Select(i);

@@ -94,8 +94,12 @@ namespace Nodify.Compatibility
         {
             get
             {
-                if (currentPointerArgs == null)
-                    throw new InvalidOperationException($"You may only call {nameof(ReleaseMouseCapture)} from within a {nameof(OnMouseUp)} or {nameof(OnMouseDown)} event handler.");
+                // FIXME: Nenkai: I got no idea why this check exists.
+                // In Avalonia 12 currentPointerArgs stays null when starting a connection
+                // Simply uncommenting this fixes it?
+
+                //if (currentPointerArgs == null)
+                //    throw new InvalidOperationException($"You may only call {nameof(ReleaseMouseCapture)} from within a {nameof(OnMouseUp)} or {nameof(OnMouseDown)} event handler.");
 
                 return ReferenceEquals(currentPointerArgs?.Pointer.Captured, this);
             }
