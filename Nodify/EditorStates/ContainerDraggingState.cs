@@ -22,6 +22,7 @@ namespace Nodify
         public override void Enter(ContainerState? from, MouseEventArgs? e)
         {
             _initialMousePosition = e?.GetPosition(Editor.ItemsHost) ?? default;
+            _currentMousePosition = _initialMousePosition;
 
             Container.IsSelected = true;
             Container.IsPreviewingLocation = true;
